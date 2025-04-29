@@ -22,7 +22,7 @@ class MapLocationPicker extends StatefulWidget {
   /// Lite mode for the map (default: false)
   final bool liteModeEnabled;
 
-  Function<GoogleMapController>(GoogleMapController) onControllerInit;
+  final void Function(GoogleMapController) onControllerInit;
 
   /// API key for the map & places
   final String apiKey;
