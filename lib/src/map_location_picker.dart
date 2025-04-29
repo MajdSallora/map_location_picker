@@ -22,6 +22,8 @@ class MapLocationPicker extends StatefulWidget {
   /// Lite mode for the map (default: false)
   final bool liteModeEnabled;
 
+  Function<GoogleMapController>(GoogleMapController) onControllerInit;
+
   /// API key for the map & places
   final String apiKey;
 
@@ -303,7 +305,7 @@ class MapLocationPicker extends StatefulWidget {
   /// Duration for search debounce in milliseconds
   final Duration debounceDuration;
 
-  const MapLocationPicker({
+  MapLocationPicker({
     super.key,
     this.desiredAccuracy = LocationAccuracy.high,
     required this.apiKey,
@@ -311,6 +313,7 @@ class MapLocationPicker extends StatefulWidget {
     this.geoCodingHttpClient,
     this.geoCodingApiHeaders,
     this.language,
+    required this.onControllerInit,
     this.locationType = const [],
     this.resultType = const [],
     this.minMaxZoomPreference = const MinMaxZoomPreference(0, 16),
@@ -477,8 +480,10 @@ class _MapLocationPickerState extends State<MapLocationPicker> {
                 );
                 setState(() {});
               },
-              onMapCreated: (GoogleMapController controller) =>
-                  _controller.complete(controller),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+                widget.onControllerInit(controller);
+              },
               markers: {
                 Marker(
                   markerId: const MarkerId('one'),

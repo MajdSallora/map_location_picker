@@ -162,7 +162,7 @@ class PlacesAutocomplete extends StatefulWidget {
   /// ```
   ///
   /// If not specified, the error is shown in [ThemeData.errorColor](https://docs.flutter.io/flutter/material/ThemeData/errorColor.html)
-  final Widget Function(BuildContext, Object?)? suggestionErrorBuilder;
+  final Widget Function(BuildContext, Object?)? errorBuilder;
 
   /// The duration that [transitionBuilder] animation takes.
   ///
@@ -190,7 +190,7 @@ class PlacesAutocomplete extends StatefulWidget {
   final bool hideOnEmpty;
 
   /// If set to true, nothing will be shown if there is an error.
-  /// [suggestionErrorBuilder] will also be ignored.
+  /// [errorBuilder] will also be ignored.
   ///
   /// Defaults to false.
   final bool hideOnError;
@@ -304,7 +304,7 @@ class PlacesAutocomplete extends StatefulWidget {
     this.controller,
     this.debounceDuration = const Duration(milliseconds: 300),
     this.direction = VerticalDirection.down,
-    this.suggestionErrorBuilder,
+    this.errorBuilder,
     this.hideOnEmpty = false,
     this.hideOnError = false,
     this.hideOnLoading = false,
@@ -461,7 +461,7 @@ class _PlacesAutocompleteState extends State<PlacesAutocomplete> {
               autoFlipDirection: widget.autoFlipDirection,
               debounceDuration: widget.debounceDuration,
               direction: widget.direction,
-              suggestionErrorBuilder: widget.suggestionErrorBuilder,
+              errorBuilder: widget.errorBuilder,
               focusNode: widget.focusNode,
               hideOnEmpty: widget.hideOnEmpty,
               hideOnError: widget.hideOnError,
